@@ -1,9 +1,8 @@
-<script setup>
-import { isMobileTerminal } from './utils/flexible'
-</script>
+<script setup></script>
 
 <template>
-  <div class="md:p-8 text-2xl">{{ isMobileTerminal }}</div>
+  <!-- 一级路由出口 -->
+  <router-view />
 </template>
 
 <style scoped></style>
