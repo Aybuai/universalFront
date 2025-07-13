@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white sticky top-0 left-0 z-10">
     <ul
-      class="relative flex overflow-x-auto p-1 text-xl text-zinc-600 overflow-hidden"
+      class="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden"
     >
       <li
         v-for="item in data"
