@@ -13,3 +13,9 @@
   --text-xl: 0.65rem;
   --text-xl--line-height: 0.75rem;
 }
+/* 自定义修饰符 */
+@layer utilities {
+  .shadow-l-white {
+    box-shadow: -10px 0 10px white;
+  }
+}
