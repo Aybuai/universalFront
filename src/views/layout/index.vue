@@ -2,7 +2,7 @@
   <div class="h-screen">
     <header-vue class="h-header"></header-vue>
     <main-vue class="h-main"></main-vue>
-    <floating-vue class="fixed bottom-10 right-2"></floating-vue>
+    <floating-vue></floating-vue>
   </div>
 </template>
 
