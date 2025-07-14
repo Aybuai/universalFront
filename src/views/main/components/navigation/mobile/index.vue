@@ -34,7 +34,7 @@
       </li>
     </ul>
     <m-popup v-model="isOpenPopup">
-      <div>我是内容</div>
+      <menu-vue :categories="data" @onItemClick="onItemClick"></menu-vue>
     </m-popup>
   </div>
 </template>
@@ -42,6 +42,7 @@
 <script setup>
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, ref, watch } from 'vue'
+import MenuVue from '@/views/main/components/menu/index.vue'
 
 // vite 创建的项目可以直接使用 defineProps，不用导入
 defineProps({
@@ -91,6 +92,11 @@ watch(currentCategoryIndex, (val) => {
     // 滑块的位置 = ul 横向滚动位置 + 当前元素的 left 偏移量 - ul padding
     transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
     width: `${width}px`
+  }
+  // popup 弹出点击 menu时，navigationBar 定位到已切换的滑块
+  if (isOpenPopup.value) {
+    isOpenPopup.value = false
+    ulTarget.value.scrollLeft = left + ulTarget.value.scrollLeft - 10
   }
 })
 
