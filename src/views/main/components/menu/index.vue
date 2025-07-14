@@ -23,6 +23,6 @@ defineProps({
 })
 
 // 推荐，emits 事件都主动手动注册一下
-defineEmits('onItemClick')
+defineEmits(['onItemClick'])
 </script>
 <style scoped lang="scss"></style>

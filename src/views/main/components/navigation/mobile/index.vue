@@ -95,7 +95,6 @@ watch(currentCategoryIndex, (val) => {
   }
   // popup 弹出点击 menu时，navigationBar 定位到已切换的滑块
   if (isOpenPopup.value) {
-    isOpenPopup.value = false
     ulTarget.value.scrollLeft = left + ulTarget.value.scrollLeft - 10
   }
 })
@@ -103,6 +102,7 @@ watch(currentCategoryIndex, (val) => {
 // item 点击事件
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
+  isOpenPopup.value = false
 }
 
 // popup 展示
