@@ -25,6 +25,12 @@
         class="opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200 group-hover:opacity-100"
       ></div>
       <!-- TODO: 搜索按钮(通用组件) -->
+      <m-button
+        class="absolute translate-y-[-50%] top-[50%] right-0.5 rounded-full"
+        icon="search"
+        iconColor="#ffffff"
+        @click="onClick"
+      ></m-button>
     </div>
     <!-- 下拉区 -->
     <transition name="slide">
@@ -37,7 +43,11 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const onClick = () => {
+  console.log('点击事件')
+}
+</script>
 
 <style lang="scss" scoped>
 .slide-enter-active,

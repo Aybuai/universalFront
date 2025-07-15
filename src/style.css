@@ -12,6 +12,9 @@
   --text-lg--line-height: 0.65rem;
   --text-xl: 0.65rem;
   --text-xl--line-height: 0.75rem;
+
+  --color-main: #f44c58;
+  --color-hover-main: #f32836;
 }
 /* 自定义修饰符 */
 @layer utilities {
