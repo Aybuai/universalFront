@@ -21,7 +21,7 @@
 
       <!-- items -->
       <li
-        v-for="(item, index) in data"
+        v-for="(item, index) in $store.getters.categories"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
         :class="{
@@ -34,7 +34,7 @@
       </li>
     </ul>
     <m-popup v-model="isOpenPopup">
-      <menu-vue :categories="data" @onItemClick="onItemClick"></menu-vue>
+      <menu-vue @onItemClick="onItemClick"></menu-vue>
     </m-popup>
   </div>
 </template>
@@ -43,14 +43,6 @@
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, ref, watch } from 'vue'
 import MenuVue from '@/views/main/components/menu/index.vue'
-
-// vite 创建的项目可以直接使用 defineProps，不用导入
-defineProps({
-  data: {
-    type: Array,
-    required: true
-  }
-})
 
 // 滑块
 const sliderStyle = ref({
@@ -84,9 +76,9 @@ onBeforeUpdate(() => {
 // 获取 ul 元素，以计算偏移位置
 const ulTarget = ref(null)
 const { x: ulScrollLeft } = useScroll(ulTarget)
-watch(currentCategoryIndex, (val) => {
+watch(currentCategoryIndex, (index) => {
   // 获取选中元素的 left、width
-  const { width, left } = itemRefs[val].getBoundingClientRect()
+  const { width, left } = itemRefs[index].getBoundingClientRect()
   // 为 sliderStyle 设置样式
   sliderStyle.value = {
     // 滑块的位置 = ul 横向滚动位置 + 当前元素的 left 偏移量 - ul padding
@@ -96,13 +88,17 @@ watch(currentCategoryIndex, (val) => {
   // popup 弹出点击 menu时，navigationBar 定位到已切换的滑块
   if (isOpenPopup.value) {
     ulTarget.value.scrollLeft = left + ulTarget.value.scrollLeft - 10
+    isOpenPopup.value = false
   }
 })
 
 // item 点击事件
 const onItemClick = (index) => {
+  if (currentCategoryIndex.value === index) {
+    isOpenPopup.value = false
+    return
+  }
   currentCategoryIndex.value = index
-  isOpenPopup.value = false
 }
 
 // popup 展示

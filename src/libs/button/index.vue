@@ -125,6 +125,7 @@ const sizeKey = computed(() => {
   return props.icon ? 'icon-' + props.size : props.size
 })
 
+// vite 创建的项目可以直接使用 defineProps，不用导入
 const emits = defineEmits([EMITS_CLICK])
 
 /**

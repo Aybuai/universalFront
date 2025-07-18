@@ -16,6 +16,7 @@
         <div
           v-if="isVisible"
           v-bind="$attrs"
+          ref="menuTarget"
           class="w-screen bg-white z-50 fixed bottom-0"
         >
           <slot />
@@ -26,8 +27,8 @@
 </template>
 
 <script setup>
-import { useScrollLock, useVModel } from '@vueuse/core'
-import { watch } from 'vue'
+import { useEventListener, useScrollLock, useVModel } from '@vueuse/core'
+import { onMounted, ref, watch } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -55,6 +56,15 @@ watch(
     immediate: true
   }
 )
+
+const menuTarget = ref(null)
+onMounted(() => {
+  // 解决 @vueuse/core 新版本 useScrollLock 会导致所有元素无法响应 touchmove 事件问题
+  useEventListener(menuTarget, 'touchmove', (event) => {
+    // 阻止事件冒泡
+    event.stopPropagation()
+  })
+})
 </script>
 <style scoped lang="scss">
 // fade 展示动画
