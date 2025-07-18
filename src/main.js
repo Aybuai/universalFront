@@ -8,6 +8,9 @@ import mLibs from './libs'
 // 导入虚拟注册 svg-icons
 import 'virtual:svg-icons-register'
 import store from './store'
+import useTheme from './utils/theme'
 
 useREM()
+// 初始化主题
+useTheme()
 createApp(App).use(mLibs).use(store).use(router).mount('#app')

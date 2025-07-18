@@ -17,7 +17,7 @@
           v-if="isVisible"
           v-bind="$attrs"
           ref="menuTarget"
-          class="w-screen bg-white z-50 fixed bottom-0"
+          class="w-screen bg-white dark:bg-zinc-800 z-50 fixed bottom-0"
         >
           <slot />
         </div>
