@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import getters from './getters'
 import category from './modules/category'
-// 自动持久化 vuex 中的数据；并且自动更新
+// 自动保存 vuex 中的数据到 localStorage，并且在下次开始的时候自动读取这个数据到对应的 state 中
 import createPersistedState from 'vuex-persistedstate'
 
 const store = createStore({
