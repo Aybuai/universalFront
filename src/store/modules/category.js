@@ -1,12 +1,12 @@
 import { getCategory } from '@/api/category'
-import { ALL_CATEGORY_ITEM } from '@/constants'
+import { ALL_CATEGORY_ITEM, CATEGORY_NORMAL_DATA } from '@/constants'
 
 export default {
   // 独立作用域
   namespaced: true,
   state: () => ({
     // navigationBar 展示的数据源
-    categories: [ALL_CATEGORY_ITEM]
+    categories: CATEGORY_NORMAL_DATA
   }),
   mutations: {
     /**
