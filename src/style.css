@@ -17,15 +17,12 @@
 
   --color-main: #f44c58;
   --color-hover-main: #f32836;
+
+  --l-white: -10px 0 10px white;
+  --l-zinc: -10px 0 10px #18181b;
 }
 /* 自定义修饰符 */
 @layer utilities {
-  .shadow-l-white {
-    box-shadow: -10px 0 10px white;
-  }
-  .shadow-l-zinc {
-    box-shadow: -10px 0 10px #18181b;
-  }
   .h-header {
     height: 72px;
   }

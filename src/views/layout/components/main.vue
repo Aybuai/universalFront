@@ -1,4 +1,5 @@
 <template>
+  <!-- pc 端二级路由入口 => navigationBar -->
   <router-view></router-view>
 </template>
 
