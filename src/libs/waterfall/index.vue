@@ -23,7 +23,7 @@
       </div>
     </template>
     <!-- 可以给一个加载中的描述，没有也无所谓 -->
-    <div v-else class="flex justify-center items-center">加载中...</div>
+    <!-- <div v-else class="flex justify-center items-center">加载中...</div> -->
   </div>
 </template>
 
