@@ -101,6 +101,7 @@ const containerLeft = ref(0)
  * 计算容器宽度
  */
 const useContainerWidth = () => {
+  // getComputedStyle 可以获取到当前元素的一些信息，参考 MDN 手册
   const { paddingLeft, paddingRight } = getComputedStyle(
     containerTarget.value,
     null
