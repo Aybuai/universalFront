@@ -1,7 +1,8 @@
 <template>
   <div class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500">
     <navigation-vue />
-    <div class="max-w-screen-xl mx-auto relative m-1 xl:mt-4">
+    <!-- max-w-screen-xl tailwind4.0 以上版本宽度不生效 -->
+    <div class="max-w-[1280px] mx-auto relative m-1 xl:mt-4">
       <list-vue></list-vue>
     </div>
   </div>

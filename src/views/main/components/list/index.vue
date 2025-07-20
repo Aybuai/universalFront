@@ -1,7 +1,14 @@
 <template>
-  <div>
-    <item-vue v-for="item in pexelsList" :key="item.id" :data="item"></item-vue>
-  </div>
+  <m-waterfall
+    :data="pexelsList"
+    nodeKey="id"
+    :column="5"
+    :picturePreReading="true"
+  >
+    <template v-slot="{ item, width }">
+      <item-vue :data="item"></item-vue>
+    </template>
+  </m-waterfall>
 </template>
 
 <script setup>
@@ -18,7 +25,7 @@ let query = {
 }
 const pexelsList = ref([])
 const getPexelsData = async () => {
-  const { list } = await getPexelsList()
+  const { list } = await getPexelsList(query)
   pexelsList.value = list
 }
 getPexelsData()
