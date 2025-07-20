@@ -69,6 +69,7 @@ const emitLoad = () => {
  */
 watch(loading, () => {
   // 触发 load，延迟处理，等待渲染和 useIntersectionObserver 的再次触发
+  // TODO 当是图片预加载时，没有容器固定高度，导致会一直请求接口
   setTimeout(() => {
     emitLoad()
   }, 100)
