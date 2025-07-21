@@ -15,5 +15,6 @@ export default {
     return getters.categories.findIndex((item) => {
       return item.id === getters.currentCategory.id
     })
-  }
+  },
+  histories: (state) => state.search.histories
 }
