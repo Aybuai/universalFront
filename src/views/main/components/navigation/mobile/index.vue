@@ -25,10 +25,10 @@
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
         :class="{
-          'text-zinc-100': currentCategoryIndex === index
+          'text-zinc-100': $store.getters.currentCategoryIndex === index
         }"
         :ref="setItemRef"
-        @click="onItemClick(index)"
+        @click="onItemClick(item, index)"
       >
         {{ item.name }}
       </li>
@@ -43,6 +43,7 @@
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, ref, watch } from 'vue'
 import MenuVue from '@/views/main/components/menu/index.vue'
+import { useStore } from 'vuex'
 
 // 滑块
 const sliderStyle = ref({
@@ -58,8 +59,6 @@ const sliderStyle = ref({
  * 4、最后在 currentCategoryIndex 发生改变时，获取 item 下标元素的 left 和 width，计算 sliderStyle 即可
  */
 
-// 选中 item 的下标
-const currentCategoryIndex = ref(0)
 // 获取填充的所有 item 元素
 let itemRefs = []
 // 想获取动态dom元素的ref得用函数获取
@@ -73,32 +72,37 @@ onBeforeUpdate(() => {
   itemRefs = []
 })
 
+const store = useStore()
+
 // 获取 ul 元素，以计算偏移位置
 const ulTarget = ref(null)
 const { x: ulScrollLeft } = useScroll(ulTarget)
-watch(currentCategoryIndex, (index) => {
-  // 获取选中元素的 left、width
-  const { width, left } = itemRefs[index].getBoundingClientRect()
-  // 为 sliderStyle 设置样式
-  sliderStyle.value = {
-    // 滑块的位置 = ul 横向滚动位置 + 当前元素的 left 偏移量 - ul padding
-    transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
-    width: `${width}px`
+watch(
+  () => store.getters.currentCategoryIndex,
+  (index) => {
+    // 获取选中元素的 left、width
+    const { width, left } = itemRefs[index].getBoundingClientRect()
+    // 为 sliderStyle 设置样式
+    sliderStyle.value = {
+      // 滑块的位置 = ul 横向滚动位置 + 当前元素的 left 偏移量 - ul padding
+      transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
+      width: `${width}px`
+    }
+    // popup 弹出点击 menu时，navigationBar 定位到已切换的滑块
+    if (isOpenPopup.value) {
+      ulTarget.value.scrollLeft = left + ulTarget.value.scrollLeft - 10
+      isOpenPopup.value = false
+    }
   }
-  // popup 弹出点击 menu时，navigationBar 定位到已切换的滑块
-  if (isOpenPopup.value) {
-    ulTarget.value.scrollLeft = left + ulTarget.value.scrollLeft - 10
-    isOpenPopup.value = false
-  }
-})
+)
 
 // item 点击事件
-const onItemClick = (index) => {
-  if (currentCategoryIndex.value === index) {
+const onItemClick = (item, index) => {
+  if (store.getters.currentCategoryIndex === index) {
     isOpenPopup.value = false
     return
   }
-  currentCategoryIndex.value = index
+  store.commit('app/changeCurrentCategory', item)
 }
 
 // popup 展示

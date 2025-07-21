@@ -1,0 +1,22 @@
+import { ALL_CATEGORY_ITEM } from '@/constants'
+
+/**
+ * 当前选中的分类，不需要 localStorage 缓存
+ */
+export default {
+  // 独立作用域
+  namespaced: true,
+  state: () => ({
+    // 当前选中的分类
+    currentCategory: ALL_CATEGORY_ITEM
+  }),
+  mutations: {
+    /**
+     * 切换选中分类
+     */
+    changeCurrentCategory(state, newCategory) {
+      state.currentCategory = newCategory
+    }
+  },
+  actions: {}
+}

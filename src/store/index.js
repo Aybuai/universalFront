@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import getters from './getters'
 import category from './modules/category'
 import theme from './modules/theme'
+import app from './modules/app'
 // 自动保存 vuex 中的数据到 localStorage，并且在下次开始的时候自动读取这个数据到对应的 state 中
 import createPersistedState from 'vuex-persistedstate'
 
@@ -9,7 +10,8 @@ const store = createStore({
   getters,
   modules: {
     category,
-    theme
+    theme,
+    app
   },
   plugins: [
     createPersistedState({
