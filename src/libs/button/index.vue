@@ -60,6 +60,7 @@ const sizeEnum = {
 </script>
 
 <script setup>
+import mSvgIcon from '../svg-icon/index.vue'
 import { computed } from 'vue'
 
 const props = defineProps({
