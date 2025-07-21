@@ -99,6 +99,10 @@ watch(
 // item 点击事件
 const onItemClick = (item, index) => {
   if (store.getters.currentCategoryIndex === index) {
+    // 获取选中元素的 left
+    const { left } = itemRefs[index].getBoundingClientRect()
+    ulTarget.value.scrollLeft = left + ulTarget.value.scrollLeft - 10
+    // 关闭 popup 弹窗
     isOpenPopup.value = false
     return
   }
