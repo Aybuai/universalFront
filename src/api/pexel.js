@@ -9,3 +9,15 @@ export const getPexelsList = (params) => {
     params
   })
 }
+
+/**
+ * 获取搜索提示
+ */
+export const getHint = (q) => {
+  return request({
+    url: '/pexels/hint',
+    params: {
+      q
+    }
+  })
+}
