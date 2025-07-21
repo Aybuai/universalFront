@@ -3,7 +3,7 @@
     <div
       class="relative w-full rounded cursor-zoom-in group"
       :style="{
-        backgroundColor: radomRGB()
+        backgroundColor: randomRGB()
       }"
     >
       <!-- :src="data.photo" -->
@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { radomRGB } from '@/utils/color'
+import { randomRGB } from '@/utils/color'
 
 defineProps({
   data: {
