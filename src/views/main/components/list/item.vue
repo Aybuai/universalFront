@@ -9,6 +9,7 @@
       <!-- :src="data.photo" -->
       <img
         v-lazy
+        ref="imgTarget"
         class="w-full rounded bg-transparent"
         :src="data.photo"
         :style="{
@@ -20,12 +21,14 @@
         class="hidden opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 left-0 rounded duration-300 group-hover:opacity-100 xl:block"
       >
         <m-button class="absolute top-1.5 left-1.5">分享</m-button>
+        <!-- 喜欢 -->
         <m-button
           class="absolute top-1.5 right-1.5"
           type="info"
           icon="heart"
           iconClass="fill-zinc-900 dark:fill-zinc-200"
         />
+        <!-- 下载 -->
         <m-button
           class="absolute bottom-1.5 left-1.5 bg-zinc-100/70"
           type="info"
@@ -34,12 +37,14 @@
           iconClass="fill-zinc-900 dark:fill-zinc-200"
           @click="onDownload"
         />
+        <!-- 全屏 -->
         <m-button
           class="absolute bottom-1.5 right-1.5 bg-zinc-100/70"
           type="info"
           size="small"
           icon="full"
           iconClass="fill-zinc-900 dark:fill-zinc-200"
+          @click="onImgFullScreen"
         />
       </div>
     </div>
@@ -62,6 +67,8 @@
 import { randomRGB } from '@/utils/color'
 import { saveAs } from 'file-saver'
 import { message } from '@/libs'
+import { ref } from 'vue'
+import { useFullscreen } from '@vueuse/core'
 
 const props = defineProps({
   data: {
@@ -86,4 +93,10 @@ const onDownload = () => {
     saveAs(props.data.photo)
   }, 100)
 }
+
+/**
+ * 全屏
+ */
+const imgTarget = ref(null)
+const { enter: onImgFullScreen } = useFullscreen(imgTarget)
 </script>
