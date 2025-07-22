@@ -60,6 +60,7 @@ const sizeEnum = {
 </script>
 
 <script setup>
+// 函数形式创建dom，得手动导入所需组件，不能使用全局注册
 import mSvgIcon from '../svg-icon/index.vue'
 import { computed } from 'vue'
 

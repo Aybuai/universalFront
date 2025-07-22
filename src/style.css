@@ -17,6 +17,15 @@
 
   --color-main: #f44c58;
   --color-hover-main: #f32836;
+  --color-success-100: #f2f9ec;
+  --color-success-200: #e4f2db;
+  --color-success-300: #7ec050;
+  --color-warn-100: #fcf6ed;
+  --color-warn-200: #f8ecda;
+  --color-warn-300: #dca550;
+  --color-error-100: #ed7456;
+  --color-error-200: #f3471c;
+  --color-error-300: #ffffff;
 
   --l-white: -10px 0 10px white;
   --l-zinc: -10px 0 10px #18181b;
