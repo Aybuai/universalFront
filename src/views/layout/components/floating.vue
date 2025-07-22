@@ -3,6 +3,7 @@
     <!-- 引导页 -->
     <div
       class="guide-start w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 group hover:shadow-lg"
+      @click="onGuideClick"
     >
       <m-svg-icon
         name="guide"
@@ -40,5 +41,37 @@
   </div>
 </template>
 
-<script setup></script>
-<style scoped lang="scss"></style>
+<script setup>
+import Driver from 'driver.js'
+import 'driver.js/dist/driver.min.css'
+import steps from './steps'
+import { onMounted } from 'vue'
+
+/**
+ * 引导页处理
+ */
+let driver = null
+onMounted(() => {
+  driver = new Driver({
+    // 禁止点击蒙版关闭
+    allowClose: false,
+    closeBtnText: '关闭',
+    nextBtnText: '下一个',
+    prevBtnText: '上一个'
+  })
+})
+
+/**
+ * 开始引导
+ */
+const onGuideClick = () => {
+  driver.defineSteps(steps)
+  driver.start()
+}
+</script>
+<style scoped lang="scss">
+.driver-fix-stacking {
+  position: fixed;
+  z-index: 100004 !important;
+}
+</style>
