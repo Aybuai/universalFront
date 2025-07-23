@@ -12,10 +12,20 @@
       class="w-full px-1"
     >
       <template v-slot="{ item, width }">
-        <item-vue :data="item" :width="width"></item-vue>
+        <item-vue :data="item" :width="width" @click="onToPins"></item-vue>
       </template>
     </m-waterfall>
   </m-infinite>
+
+  <!-- 大图详情处理 -->
+  <transition
+    :css="false"
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @leave="leave"
+  >
+    <pins-vue v-if="isVisiblePins" :id="currentPins.id" />
+  </transition>
 </template>
 
 <script setup>
@@ -24,6 +34,9 @@ import { ref, watch } from 'vue'
 import itemVue from './item.vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useStore } from 'vuex'
+import gsap from 'gsap'
+import { useEventListener } from '@vueuse/core'
+import pinsVue from '../../../pins/components/pins.vue'
 
 const store = useStore()
 /**
@@ -106,5 +119,57 @@ watch(
     })
   }
 )
+
+// 控制 pins 展示
+const isVisiblePins = ref(false)
+// 当前选中的 pins 属性
+const currentPins = ref({})
+/**
+ * 进入 pins
+ */
+const onToPins = (item) => {
+  history.pushState(null, null, `/pins/${item.id}`)
+  currentPins.value = item
+  isVisiblePins.value = true
+}
+
+const beforeEnter = (el) => {
+  gsap.set(el, {
+    scaleX: 0,
+    scaleY: 0,
+    transformOrigin: '0 0',
+    translateX: currentPins.value.location?.translateX,
+    translateY: currentPins.value.location?.translateY,
+    opacity: 0
+  })
+}
+const enter = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 1,
+    scaleY: 1,
+    opacity: 1,
+    translateX: 0,
+    translateY: 0,
+    onComplete: done
+  })
+}
+const leave = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 0,
+    scaleY: 0,
+    x: currentPins.value.location?.translateX,
+    y: currentPins.value.location?.translateY,
+    opacity: 0
+  })
+}
+
+/**
+ * 监听浏览器后退按钮事件
+ */
+useEventListener(window, 'popstate', () => {
+  isVisiblePins.value = false
+})
 </script>
 <style scoped lang="scss"></style>
