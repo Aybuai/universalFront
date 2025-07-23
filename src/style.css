@@ -29,6 +29,8 @@
 
   --l-white: -10px 0 10px white;
   --l-zinc: -10px 0 10px #18181b;
+
+  --blur-4xl: 240px;
 }
 /* 自定义修饰符 */
 @layer utilities {
