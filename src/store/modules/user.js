@@ -50,6 +50,17 @@ export default {
             : data.nickname
         }`
       )
+    },
+    /**
+     * 退出登录
+     */
+    logout(context) {
+      // 清空 token
+      context.commit('setToken', '')
+      // 清空用户信息
+      context.commit('setUserInfo', '')
+      // 刷新页面，退出登录之后，重新刷新下页面，因为对于前台项目而言，用户是否登录（是否为 VIP）看到的数据可能不同
+      location.reload()
     }
   }
 }

@@ -25,15 +25,30 @@ service.interceptors.request.use(
 
 // 响应拦截器
 // 接口请求返回后，.then 之前
-service.interceptors.response.use((response) => {
-  const { success, message, data } = response.data
+service.interceptors.response.use(
+  (response) => {
+    const { success, message, data } = response.data
 
-  //   要根据success的成功与否决定下面的操作
-  if (success) {
-    return data
+    //   要根据success的成功与否决定下面的操作
+    if (success) {
+      return data
+    }
+    // TODO：业务错误
+    return Promise.reject(new Error(message))
+  },
+  (error) => {
+    // 处理 token 超时问题
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      // TODO: token超时
+      store.dispatch('user/logout')
+    }
+    // TODO: 提示错误消息
+    return Promise.reject(error)
   }
-  // TODO：业务错误
-  return Promise.reject(new Error(message))
-})
+)
 
 export default service
