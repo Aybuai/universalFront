@@ -14,20 +14,33 @@
         账号登录
       </h3>
       <!-- 表单 -->
-      <form>
-        <input
+      <vee-form @submit="onLoginHandler">
+        <!-- 用户名 -->
+        <vee-field
           class="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 text-base focus:border-b-main dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
           name="username"
           type="text"
           placeholder="用户名"
           autocomplete="on"
+          :rules="validateUsername"
         />
-        <input
+        <vee-error-message
+          class="text-sm text-red-600 block mt-0.5 text-left"
+          name="username"
+        />
+
+        <!-- 密码 -->
+        <vee-field
           class="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 text-base focus:border-b-main dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
           name="password"
           type="password"
           placeholder="密码"
           autocomplete="on"
+          :rules="validatePassword"
+        />
+        <vee-error-message
+          class="text-sm text-red-600 block mt-0.5 text-left"
+          name="password"
         />
 
         <div class="pt-1 pb-3 leading-[0px] text-right">
@@ -38,10 +51,13 @@
           </a>
         </div>
 
-        <m-button class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800">
+        <m-button
+          class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
+          :isActiveAnim="false"
+        >
           登录
         </m-button>
-      </form>
+      </vee-form>
 
       <div class="flex justify-around mt-4">
         <!-- QQ -->
@@ -55,6 +71,19 @@
 
 <script setup>
 import headerVue from '../components/header.vue'
+import {
+  Form as VeeForm,
+  Field as VeeField,
+  ErrorMessage as VeeErrorMessage
+} from 'vee-validate'
+import { validatePassword, validateUsername } from '../validate'
+
+/**
+ * 登录
+ */
+const onLoginHandler = () => {
+  console.log('onLoginHandler')
+}
 </script>
 
 <style scoped lang="scss"></style>
