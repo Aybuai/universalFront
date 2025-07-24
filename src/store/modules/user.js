@@ -35,6 +35,9 @@ export default {
       // 获取用户信息
       context.dispatch('profile')
     },
+    /**
+     * 获取用户信息
+     */
     async profile(context) {
       const data = await getProfile()
       context.commit('setUserInfo', data)
