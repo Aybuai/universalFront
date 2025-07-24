@@ -16,6 +16,14 @@ export default {
       return item.id === getters.currentCategory.id
     })
   },
+  // 搜索历史
   histories: (state) => state.search.histories,
-  searchText: (state) => state.app.searchText
+  // 搜索文本
+  searchText: (state) => state.app.searchText,
+  // 登录 token
+  token: (state) => state.user.token,
+  /**
+   * 获取用户信息
+   */
+  userInfo: (state) => state.user.userInfo
 }

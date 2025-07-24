@@ -44,7 +44,6 @@ onMounted(() => {
     // 用户拼图成功后的回调
     async onSuccess(arr) {
       const res = await getCaptcha({ behavior: arr })
-      console.log(res)
       if (res) {
         emits(EMITS_SUCCESS)
       }
