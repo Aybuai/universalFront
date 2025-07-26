@@ -67,8 +67,7 @@
           <!-- v-model 的语法糖 -->
           <!-- modelValue + v-bind & @update:modelValue -->
           <m-input
-            :modelValue="$store.getters.userInfo.nickname"
-            @update:modelValue="changeStoreUserInfo('nickname', $event)"
+            v-model="userInfo.nickname"
             class="w-full"
             type="text"
             max="20"
@@ -80,8 +79,7 @@
             >职位</span
           >
           <m-input
-            :modelValue="$store.getters.userInfo.title"
-            @update:modelValue="changeStoreUserInfo('title', $event)"
+            v-model="userInfo.title"
             class="w-full"
             type="text"
           ></m-input>
@@ -92,8 +90,7 @@
             >公司</span
           >
           <m-input
-            :modelValue="$store.getters.userInfo.company"
-            @update:modelValue="changeStoreUserInfo('company', $event)"
+            v-model="userInfo.company"
             class="w-full"
             type="text"
           ></m-input>
@@ -104,8 +101,7 @@
             >个人主页</span
           >
           <m-input
-            :modelValue="$store.getters.userInfo.homePage"
-            @update:modelValue="changeStoreUserInfo('homePage', $event)"
+            v-model="userInfo.homePage"
             class="w-full"
             type="text"
           ></m-input>
@@ -116,8 +112,7 @@
             >个人介绍</span
           >
           <m-input
-            :modelValue="$store.getters.userInfo.introduction"
-            @update:modelValue="changeStoreUserInfo('introduction', $event)"
+            v-model="userInfo.introduction"
             class="w-full"
             type="textarea"
             max="50"
@@ -194,12 +189,7 @@ const onLogoutClick = () => {
 /**
  * 数据本地的双向同步
  */
-const changeStoreUserInfo = (key, value) => {
-  store.commit('user/setUserInfo', {
-    ...store.getters.userInfo,
-    [key]: value
-  })
-}
+const userInfo = ref(store.getters.userInfo)
 
 /**
  * 修改个人信息
@@ -209,6 +199,8 @@ const onChangeProfile = async () => {
   loading.value = true
   await putProfile(store.getters.userInfo)
   message('success', '用户信息修改成功')
+  // 同步 vuex
+  store.commit('user/setUserInfo', userInfo.value)
   loading.value = false
 }
 </script>
