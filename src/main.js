@@ -10,6 +10,7 @@ import mDirectives from './directives'
 import 'virtual:svg-icons-register'
 import store from './store'
 import useTheme from './utils/theme'
+import './permission'
 
 useREM()
 // 初始化主题
