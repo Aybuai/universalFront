@@ -80,6 +80,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'login'
+}
+</script>
+
 <script setup>
 import headerVue from '../components/header.vue'
 import {

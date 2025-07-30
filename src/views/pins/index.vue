@@ -4,6 +4,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'pins'
+}
+</script>
+
 <script setup>
 import pinsVue from './components/pins.vue'
 </script>
