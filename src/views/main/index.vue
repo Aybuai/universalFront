@@ -1,5 +1,8 @@
 <template>
-  <div class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500">
+  <div
+    class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500"
+    ref="containerTarget"
+  >
     <navigation-vue />
     <!-- max-w-screen-xl tailwind4.0 以上版本宽度不生效 -->
     <div class="max-w-[1280px] mx-auto relative m-1 xl:mt-4">
@@ -50,9 +53,22 @@ import listVue from './components/list/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { onActivated, ref } from 'vue'
+import { useScroll } from '@vueuse/core'
 
 const store = useStore()
 const router = useRouter()
+
+/**
+ * 记录页面滚动位置
+ */
+const containerTarget = ref(null)
+const { y: containerTargetScrollY } = useScroll(containerTarget)
+// 被缓存的组件再次可见，会回调 onActivated 方法
+onActivated(() => {
+  if (!containerTarget.value) return
+  containerTarget.value.scrollTop = containerTargetScrollY.value
+})
 
 /**
  * vip 点击事件
