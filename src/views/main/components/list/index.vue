@@ -1,31 +1,33 @@
 <template>
-  <m-infinite
-    v-model="loading"
-    :isFinished="isFinished"
-    @onLoad="getPexelsData"
-  >
-    <m-waterfall
-      :data="pexelsList"
-      nodeKey="id"
-      :column="isMobileTerminal ? 2 : 5"
-      :picturePreReading="false"
-      class="w-full px-1"
+  <div>
+    <m-infinite
+      v-model="loading"
+      :isFinished="isFinished"
+      @onLoad="getPexelsData"
     >
-      <template v-slot="{ item, width }">
-        <item-vue :data="item" :width="width" @click="onToPins"></item-vue>
-      </template>
-    </m-waterfall>
-  </m-infinite>
+      <m-waterfall
+        :data="pexelsList"
+        nodeKey="id"
+        :column="isMobileTerminal ? 2 : 5"
+        :picturePreReading="false"
+        class="w-full px-1"
+      >
+        <template v-slot="{ item, width }">
+          <item-vue :data="item" :width="width" @click="onToPins"></item-vue>
+        </template>
+      </m-waterfall>
+    </m-infinite>
 
-  <!-- 大图详情处理 -->
-  <transition
-    :css="false"
-    @before-enter="beforeEnter"
-    @enter="enter"
-    @leave="leave"
-  >
-    <pins-vue v-if="isVisiblePins" :id="currentPins.id" />
-  </transition>
+    <!-- 大图详情处理 -->
+    <transition
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @leave="leave"
+    >
+      <pins-vue v-if="isVisiblePins" :id="currentPins.id" />
+    </transition>
+  </div>
 </template>
 
 <script setup>

@@ -26,6 +26,8 @@ getPexelData()
  */
 const router = useRouter()
 const onPop = () => {
+  // 移动端下跳转的类型
+  store.commit('app/changeRouterType', 'back')
   router.back()
 }
 </script>

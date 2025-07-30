@@ -89,6 +89,8 @@ const menuArr = [
 const router = useRouter()
 // 进入登录
 const onToLogin = () => {
+  // 移动端下跳转的类型
+  store.commit('app/changeRouterType', 'push')
   router.push('/login')
 }
 
@@ -98,6 +100,8 @@ const onToLogin = () => {
 const onItemClick = ({ path }) => {
   // 有路径则进行路径跳转
   if (path) {
+    // 移动端下跳转的类型
+    store.commit('app/changeRouterType', 'push')
     router.push(path)
     return
   }
