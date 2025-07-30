@@ -74,7 +74,10 @@ onActivated(() => {
  * vip 点击事件
  */
 const onVipClick = () => {
-  console.log('vip')
+  // 移动端下跳转的类型
+  store.commit('app/changeRouterType', 'push')
+  // 跳转 vip
+  router.push('/member')
 }
 
 /**
