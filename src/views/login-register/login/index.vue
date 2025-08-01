@@ -65,7 +65,7 @@
 
       <div class="flex justify-around mt-4">
         <!-- QQ -->
-        <m-svg-icon class="w-4 cursor-pointer" name="qq"></m-svg-icon>
+        <qq-login-vue></qq-login-vue>
         <!-- 微信 -->
         <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
       </div>
@@ -88,6 +88,7 @@ export default {
 
 <script setup>
 import headerVue from '../components/header.vue'
+import qqLoginVue from './qq-login.vue'
 import {
   Form as VeeForm,
   Field as VeeField,

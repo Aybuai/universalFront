@@ -114,7 +114,7 @@ import {
   validateConfirmPassword
 } from '../validate'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { LOGIN_TYPE_USERNAME } from '@/constants'
 import { useStore } from 'vuex'
 
@@ -125,6 +125,7 @@ defineRule('validateConfirmPassword', validateConfirmPassword)
 
 const router = useRouter()
 const store = useStore()
+const route = useRoute()
 
 // 注册时的 loading
 const loading = ref(false)
@@ -146,8 +147,11 @@ const onRegister = async () => {
       username: regForm.value.username,
       password: regForm.value.password
     }
-    // 触发注册
-    await store.dispatch('user/register', payload)
+    // 触发注册，携带第三方数据
+    await store.dispatch('user/register', {
+      ...payload,
+      ...route.query
+    })
     // 注册成功，触发登录
     await store.dispatch('user/login', {
       ...payload,
