@@ -67,7 +67,7 @@
         <!-- QQ -->
         <qq-login-vue></qq-login-vue>
         <!-- 微信 -->
-        <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
+        <wexin-login-vue></wexin-login-vue>
       </div>
     </div>
 
@@ -89,6 +89,7 @@ export default {
 <script setup>
 import headerVue from '../components/header.vue'
 import qqLoginVue from './qq-login.vue'
+import wexinLoginVue from './wexin-login.vue'
 import {
   Form as VeeForm,
   Field as VeeField,
