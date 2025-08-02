@@ -23,7 +23,7 @@
     </div>
     <!-- popup -->
     <m-popup v-model="isOpenPopup" class="rounded">
-      <mobile-pay-select-vue></mobile-pay-select-vue>
+      <mobile-pay-select-vue :payData="payData"></mobile-pay-select-vue>
     </m-popup>
   </div>
 </template>
@@ -32,6 +32,10 @@
 import { ref } from 'vue'
 import discountsVue from '../discounts.vue'
 import mobilePaySelectVue from './mobile-pay-select.vue'
+
+defineProps({
+  payData: Object
+})
 
 const isOpenPopup = ref(false)
 const onOpenClick = () => {

@@ -1,23 +1,23 @@
 import { computed } from 'vue'
-import { PC_DEVICE_WIDTH } from '@/constants'
-import { useWindowSize } from '@vueuse/core'
+// import { PC_DEVICE_WIDTH } from '@/constants'
+// import { useWindowSize } from '@vueuse/core'
 
 /**
  * 判断当前是否为移动设备，判断依据为屏幕的宽度是否大于指定值（1280）
  */
-const { width } = useWindowSize()
-export const isMobileTerminal = computed(() => {
-  return width.value < PC_DEVICE_WIDTH
-})
+// const { width } = useWindowSize()
+// export const isMobileTerminal = computed(() => {
+//   return width.value < PC_DEVICE_WIDTH
+// })
 
 /**
  * 判断当前是否为移动设备  实际开发中以此为准
  */
-// export const isMobileTerminal = computed(() => {
-//   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-//      navigator.userAgent
-//   )
-// })
+export const isMobileTerminal = computed(() => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
+})
 
 // 因为 tailwind 的尺寸单位默认为 rem，这是为了适配各种型号的移动端，但是还没有设置 rem 的基准值
 /**
